@@ -1,8 +1,6 @@
 package ru.netology.Info;
 
-import com.github.javafaker.DateAndTime;
 import com.github.javafaker.Faker;
-import lombok.Getter;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,17 +9,15 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 
 public class CardWithDeliveryFormInfo {
     public final String city;
     public final String dateOfMeeting;
-    public final String fullName;
+    public final String name;
     public final String phone;
     public final boolean agreement;
 
@@ -32,6 +28,8 @@ public class CardWithDeliveryFormInfo {
     static int COUNT_CORRECT_CITIES = 83;
     static final String CORRECT_CITIES_CSV_FILEPATH = "src/test/resources/CorrectCities.csv";
     static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(PATTERN_OF_DATE);
+
+
 
     public static String getRandomCorrectCity() {
         String returnCity = null;
@@ -50,14 +48,45 @@ public class CardWithDeliveryFormInfo {
         return returnCity;
     }
 
+    public static String getRandomCorrectDateOfMeeting() {
+        Faker faker = new Faker(new Locale("ru"));
+        return DATE_FORMATTER.format(faker.date().
+                future(
+                        MAX_DAYS_TO_AVAILABLE_TO_ORDER_FROM_TODAY,
+                        MIN_DAYS_TO_AVAILABLE_TO_ORDER_FROM_TODAY,
+                        TimeUnit.DAYS
+                )
+        );
+    }
+
+    public static String getDateAfterToday(int daysToAdd) {
+        return LocalDate.now().plusDays(daysToAdd).format(DateTimeFormatter.ofPattern(PATTERN_OF_DATE));
+    }
+
+    public static String getRandomCorrectName() {
+        Faker faker = new Faker(new Locale("ru"));
+        //TODO: Добавить поддержку букв ё
+        return faker.name().fullName().replaceAll("Ё", "Е").replaceAll("ё", "е");
+    }
+
+    public static String getRandomCorrectPhone() {
+        Faker faker = new Faker(new Locale("ru"));
+        return faker.phoneNumber().phoneNumber();
+    }
+
+    public static boolean getRandomCorrectAgreement() {
+        Faker faker = new Faker(new Locale("ru"));
+        return faker.bool().bool();
+    }
+
     private CardWithDeliveryFormInfo(String city,
                                      String dateOfMeeting,
-                                     String fullName,
+                                     String name,
                                      String phone,
                                      boolean agreement) {
         this.city = city;
         this.dateOfMeeting = dateOfMeeting;
-        this.fullName = fullName;
+        this.name = name;
         this.phone = phone;
         this.agreement = agreement;
 
@@ -75,23 +104,13 @@ public class CardWithDeliveryFormInfo {
     }
 
     public static CardWithDeliveryFormInfo getRandomCorrectData() {
-        Faker faker = new Faker(new Locale("ru"));
         return new CardWithDeliveryFormInfo(
                 getRandomCorrectCity(),
-                DATE_FORMATTER.format(
-                        faker.date().future(
-                                MAX_DAYS_TO_AVAILABLE_TO_ORDER_FROM_TODAY,
-                                MIN_DAYS_TO_AVAILABLE_TO_ORDER_FROM_TODAY,
-                                TimeUnit.DAYS)
-                ),
-                faker.name().fullName(),
-                faker.phoneNumber().phoneNumber(),
+                getRandomCorrectDateOfMeeting(),
+                getRandomCorrectName(),
+                getRandomCorrectPhone(),
                 true
         );
-    }
-
-    public static String getDateAfterToday(int daysToAdd) {
-        return LocalDate.now().plusDays(daysToAdd).format(DateTimeFormatter.ofPattern(PATTERN_OF_DATE));
     }
 
 }

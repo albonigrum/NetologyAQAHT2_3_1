@@ -28,6 +28,56 @@ public class CardWithDeliveryFormTest {
         elem.sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
     }
 
+    void pasteTestData() {
+        $("[data-test-id=city] input").sendKeys(testData.city);
+        clearInputField($("[data-test-id=date] input"));
+        $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
+        $("[data-test-id=name] input").sendKeys(testData.name);
+        $("[data-test-id=phone] input").sendKeys(testData.phone);
+        if (testData.agreement)
+            $("[data-test-id=agreement] input").parent().click();
+    }
+
+    void pasteTestDataWithNewCity(String newCity) {
+        $("[data-test-id=city] input").sendKeys(newCity);
+        clearInputField($("[data-test-id=date] input"));
+        $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
+        $("[data-test-id=name] input").sendKeys(testData.name);
+        $("[data-test-id=phone] input").sendKeys(testData.phone);
+        if (testData.agreement)
+            $("[data-test-id=agreement] input").parent().click();
+    }
+
+    void pasteTestDataWithNewDate(String newDate) {
+        $("[data-test-id=city] input").sendKeys(testData.city);
+        clearInputField($("[data-test-id=date] input"));
+        $("[data-test-id=date] input").sendKeys(newDate);
+        $("[data-test-id=name] input").sendKeys(testData.name);
+        $("[data-test-id=phone] input").sendKeys(testData.phone);
+        if (testData.agreement)
+            $("[data-test-id=agreement] input").parent().click();
+    }
+
+    void pasteTestDataWithNewName(String newName) {
+        $("[data-test-id=city] input").sendKeys(testData.city);
+        clearInputField($("[data-test-id=date] input"));
+        $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
+        $("[data-test-id=name] input").sendKeys(newName);
+        $("[data-test-id=phone] input").sendKeys(testData.phone);
+        if (testData.agreement)
+            $("[data-test-id=agreement] input").parent().click();
+    }
+
+    void pasteTestDataWithNewPhone(String newPhone) {
+        $("[data-test-id=city] input").sendKeys(testData.city);
+        clearInputField($("[data-test-id=date] input"));
+        $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
+        $("[data-test-id=name] input").sendKeys(testData.name);
+        $("[data-test-id=phone] input").sendKeys(newPhone);
+        if (testData.agreement)
+            $("[data-test-id=agreement] input").parent().click();
+    }
+
     @BeforeEach
     void setUp() {
         open("http://localhost:9999");
@@ -41,7 +91,7 @@ public class CardWithDeliveryFormTest {
             $("[data-test-id=city] input").sendKeys(testData.city);
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
             if (testData.agreement)
                 $("[data-test-id=agreement] input").parent().click();
@@ -58,7 +108,7 @@ public class CardWithDeliveryFormTest {
             $("[data-test-id=city] input").sendKeys(testData.city);
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(dateToTest);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
             if (testData.agreement)
                 $("[data-test-id=agreement] input").parent().click();
@@ -82,7 +132,7 @@ public class CardWithDeliveryFormTest {
         void shouldSendWithIncorrectCity(String incorrectCity) {
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
 
             if (testData.agreement)
@@ -102,7 +152,7 @@ public class CardWithDeliveryFormTest {
         })
         void shouldSendWithIncorrectDateIncorrectInput(String incorrectDate) {
             $("[data-test-id=city] input").sendKeys(testData.city);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
             if (testData.agreement)
                 $("[data-test-id=agreement] input").parent().click();
@@ -116,7 +166,7 @@ public class CardWithDeliveryFormTest {
         @Test
         void shouldSendWithIncorrectDateIncorrectDate() {
             $("[data-test-id=city] input").sendKeys(testData.city);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
 
             if (testData.agreement)
@@ -162,7 +212,7 @@ public class CardWithDeliveryFormTest {
             $("[data-test-id=city] input").sendKeys(testData.city);
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             if (testData.agreement)
                 $("[data-test-id=agreement] input").parent().click();
 
@@ -176,7 +226,7 @@ public class CardWithDeliveryFormTest {
             $("[data-test-id=city] input").sendKeys(testData.city);
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(testData.dateOfMeeting);
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
 
             $$("button").find(exactText("Запланировать")).click();
@@ -208,7 +258,7 @@ public class CardWithDeliveryFormTest {
         void shouldChooseDateAfterWeekFromTable() {
             $("[data-test-id=city] input").sendKeys(testData.city);
 
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
             if (testData.agreement)
                 $("[data-test-id=agreement] input").parent().click();
@@ -240,7 +290,7 @@ public class CardWithDeliveryFormTest {
         void shouldChooseDateAfterFromTable() {
             $("[data-test-id=city] input").sendKeys(testData.city);
 
-            $("[data-test-id=name] input").sendKeys(testData.fullName);
+            $("[data-test-id=name] input").sendKeys(testData.name);
             $("[data-test-id=phone] input").sendKeys(testData.phone);
             if (testData.agreement)
                 $("[data-test-id=agreement] input").parent().click();
@@ -283,6 +333,130 @@ public class CardWithDeliveryFormTest {
                     shouldHave(text("Успешно!")).
                     shouldHave(text(dateToTest.
                             format(DateTimeFormatter.ofPattern(CardWithDeliveryFormInfo.PATTERN_OF_DATE))));
+        }
+    }
+
+    @Nested
+    class ReSendFormTests {
+        @Nested
+        class HappyPathTests {
+            @Test
+            void shouldHappyPathIfRefresh() {
+                pasteTestData();
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement success_notification =
+                        $("[data-test-id=success-notification]").waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+                success_notification.shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+
+                refresh();
+
+                String newDate = getRandomCorrectDateOfMeeting();
+                pasteTestDataWithNewDate(newDate);
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement replan_notification = $("[data-test-id=replan-notification]").
+                        waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+
+                replan_notification.$$("button").find(exactText("Перепланировать")).click();
+
+                success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
+                        shouldHave(text("Успешно!")).shouldHave(text(newDate));
+            }
+
+            @Test
+            void shouldHappyPathIfReOpen() {
+                pasteTestData();
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement success_notification =
+                        $("[data-test-id=success-notification]").waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+                success_notification.shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+
+                closeWindow();
+                open("http://localhost:9999");
+
+                String newDate = getRandomCorrectDateOfMeeting();
+                pasteTestDataWithNewDate(newDate);
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement replan_notification = $("[data-test-id=replan-notification]").
+                        waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+
+                replan_notification.$$("button").find(exactText("Перепланировать")).click();
+
+                success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
+                        shouldHave(text("Успешно!")).shouldHave(text(newDate));
+            }
+        }
+
+        @Nested
+        class SadPathTests {
+            @Test
+            void shouldSadPathIfNewCity() {
+                pasteTestData();
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement success_notification =
+                        $("[data-test-id=success-notification]").waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+                success_notification.shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+
+                refresh();
+
+                String newCity = getRandomCorrectCity();
+                pasteTestDataWithNewCity(newCity);
+
+                $$("button").find(exactText("Запланировать")).click();
+
+                assertTrue($("[data-test-id=replan-notification]").is(hidden));
+
+                success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
+                        shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+            }
+
+            @Test
+            void shouldSadPathIfNewName() {
+                pasteTestData();
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement success_notification =
+                        $("[data-test-id=success-notification]").waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+                success_notification.shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+
+                refresh();
+
+                String newName = getRandomCorrectName();
+                pasteTestDataWithNewName(newName);
+
+                $$("button").find(exactText("Запланировать")).click();
+
+                assertTrue($("[data-test-id=replan-notification]").is(hidden));
+
+                success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
+                        shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+            }
+
+            @Test
+            void shouldSadPathIfNewPhone() {
+                pasteTestData();
+
+                $$("button").find(exactText("Запланировать")).click();
+                SelenideElement success_notification =
+                        $("[data-test-id=success-notification]").waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS);
+                success_notification.shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+
+                refresh();
+
+                String newPhone = getRandomCorrectPhone();
+                pasteTestDataWithNewPhone(newPhone);
+
+                $$("button").find(exactText("Запланировать")).click();
+
+                assertTrue($("[data-test-id=replan-notification]").is(hidden));
+
+                success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
+                        shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
+            }
         }
     }
 }

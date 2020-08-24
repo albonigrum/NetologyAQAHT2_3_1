@@ -150,7 +150,7 @@ public class CardWithDeliveryFormTest {
 
             $("[data-test-id=city] input").sendKeys(incorrectCity);
             $$("button").find(exactText("Запланировать")).click();
-            assertTrue($("[data-test-id=city].input_invalid").isDisplayed());
+            $("[data-test-id=city].input_invalid").should(exist);
         }
 
         @ParameterizedTest
@@ -170,7 +170,7 @@ public class CardWithDeliveryFormTest {
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(incorrectDate);
             $$("button").find(exactText("Запланировать")).click();
-            assertTrue($("[data-test-id=date] .input.input_invalid").isDisplayed());
+            $("[data-test-id=date] .input.input_invalid").should(exist);
         }
 
         @Test
@@ -185,7 +185,7 @@ public class CardWithDeliveryFormTest {
             clearInputField($("[data-test-id=date] input"));
             $("[data-test-id=date] input").sendKeys(getDateAfterToday(0));
             $$("button").find(exactText("Запланировать")).click();
-            assertTrue($("[data-test-id=date] .input.input_invalid").isDisplayed());
+            $("[data-test-id=date] .input.input_invalid").should(exist);
         }
 
         @ParameterizedTest
@@ -205,19 +205,19 @@ public class CardWithDeliveryFormTest {
 
             $("[data-test-id=name] input").sendKeys(incorrectName);
             $$("button").find(exactText("Запланировать")).click();
-            assertTrue($("[data-test-id=name].input_invalid").isDisplayed());
+            $("[data-test-id=name].input_invalid").should(exist);
         }
 
         @ParameterizedTest
         @EmptySource
-//        @CsvSource(value = {
-//                "*/*+.,^%$#@!~`",
-//                "Ivanov",
-//                "03404309",
-//                "-12345678901",
-//                "+1234567890",
-//                "+123456789011"
-//        })
+        @CsvSource(value = {
+                "*/*+.,^%$#@!~`",
+                "Ivanov",
+                "03404309",
+                "-12345678901",
+                "+1234567890",
+                "+123456789011"
+        })
 //        Because there is not checks for phone field (exception: empty field), some test failed
         void shouldSendWithIncorrectPhone(String incorrectPhone) {
             $("[data-test-id=city] input").sendKeys(testData.city);
@@ -229,7 +229,7 @@ public class CardWithDeliveryFormTest {
 
             $("[data-test-id=phone] input").sendKeys(incorrectPhone);
             $$("button").find(exactText("Запланировать")).click();
-            assertTrue($("[data-test-id=phone].input_invalid").isDisplayed());
+            $("[data-test-id=phone].input_invalid").should(exist);
         }
 
         @Test
@@ -242,7 +242,7 @@ public class CardWithDeliveryFormTest {
 
             $$("button").find(exactText("Запланировать")).click();
 
-            assertTrue($("[data-test-id=agreement].input_invalid").isDisplayed());
+            $("[data-test-id=agreement].input_invalid").should(exist);
         }
     }
 
@@ -419,7 +419,7 @@ public class CardWithDeliveryFormTest {
 
                 $$("button").find(exactText("Запланировать")).click();
 
-                assertTrue($("[data-test-id=replan-notification]").is(hidden));
+                $("[data-test-id=replan-notification]").should(hidden);
 
                 success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
                         shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
@@ -441,7 +441,7 @@ public class CardWithDeliveryFormTest {
 
                 $$("button").find(exactText("Запланировать")).click();
 
-                assertTrue($("[data-test-id=replan-notification]").is(hidden));
+                $("[data-test-id=replan-notification]").should(hidden);
 
                 success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
                         shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));
@@ -463,7 +463,7 @@ public class CardWithDeliveryFormTest {
 
                 $$("button").find(exactText("Запланировать")).click();
 
-                assertTrue($("[data-test-id=replan-notification]").is(hidden));
+                $("[data-test-id=replan-notification]").should(hidden);
 
                 success_notification.waitUntil(visible, TIME_TO_SUCCESS_LOAD_MILLISECONDS).
                         shouldHave(text("Успешно!")).shouldHave(text(testData.dateOfMeeting));

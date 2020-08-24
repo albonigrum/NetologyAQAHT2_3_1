@@ -208,6 +208,7 @@ public class CardWithDeliveryFormTest {
 //                "+1234567890",
 //                "+123456789011"
 //        })
+//        Because there is not checks for phone field (exception: empty field)
         void shouldSendWithIncorrectPhone(String incorrectPhone) {
             $("[data-test-id=city] input").sendKeys(testData.city);
             clearInputField($("[data-test-id=date] input"));
@@ -391,7 +392,7 @@ public class CardWithDeliveryFormTest {
         }
 
         @Nested
-        class SadPathTests {
+        class SadPathTests  {
             @Test
             void shouldSadPathIfNewCity() {
                 pasteTestData();

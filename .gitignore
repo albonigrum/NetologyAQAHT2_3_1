@@ -4,6 +4,7 @@ HELP.md
 .gradle
 build/
 target/
+.allure/
 
 ### STS ###
 .apt_generated

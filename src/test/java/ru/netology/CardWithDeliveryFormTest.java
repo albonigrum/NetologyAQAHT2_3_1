@@ -2,9 +2,9 @@ package ru.netology;
 
 
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -76,6 +76,16 @@ public class CardWithDeliveryFormTest {
         $("[data-test-id=phone] input").sendKeys(newPhone);
         if (testData.agreement)
             $("[data-test-id=agreement] input").parent().click();
+    }
+
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide().screenshots(true).savePageSource(true));
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 
     @BeforeEach
@@ -208,7 +218,7 @@ public class CardWithDeliveryFormTest {
 //                "+1234567890",
 //                "+123456789011"
 //        })
-//        Because there is not checks for phone field (exception: empty field)
+//        Because there is not checks for phone field (exception: empty field), some test failed
         void shouldSendWithIncorrectPhone(String incorrectPhone) {
             $("[data-test-id=city] input").sendKeys(testData.city);
             clearInputField($("[data-test-id=date] input"));
